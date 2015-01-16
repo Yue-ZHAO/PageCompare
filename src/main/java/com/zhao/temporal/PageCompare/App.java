@@ -26,15 +26,19 @@ public class App
     	//	3. 	process each file in the folder of target pages
     	File[] fileList_TargetPage = folder_TargetPage.listFiles();
     	for (File file_TargetPage: fileList_TargetPage) {
+
+    		//	TO MAKE SURE THE FILE IS THE CLUEWEB PAGE WE NEED
+    		if (!file_TargetPage.getName().startsWith("clueweb12"))
+    			continue;
+    		
+    		//	3.0	output the signal to screen
+    		System.out.println();
+			System.out.println( "Start: " + file_TargetPage.getAbsolutePath());
     	
     		//	3.1	process the file to get path, url, timestamp
     		String filePath_TargetPage = file_TargetPage.getAbsolutePath();
     		String url = CluewebFileProcess.readURLFromCluewebFile(filePath_TargetPage);
-    		
-    		//	TO MAKE SURE THE FILE IS THE CLUEWEB PAGE WE NEED
-    		if (url.equals(""))
-    			continue;
-    		
+
     		//		implement the function to extract the timestamp
     		String timestamp_TargetPage = CluewebFileProcess.readTimeFromCluewebFile(filePath_TargetPage);
     		
@@ -53,10 +57,11 @@ public class App
     			
     			for (File file_HistoricalPage: fileList_HistoricalPage) {
     				//  For the html file
-    				String Suffix_HistoricalPage = file_HistoricalPage.getName().substring(file_HistoricalPage.getName().lastIndexOf(".")+1);
-    				
+    				//	String Suffix_HistoricalPage = file_HistoricalPage.getName().substring(file_HistoricalPage.getName().lastIndexOf(".")+1);
+    				//	Suffix_HistoricalPage.endsWith("html");
+    			
     				//	Make sure the file we check is a historical file
-    				if (!Suffix_HistoricalPage.equals("html"))
+    				if (!file_HistoricalPage.getName().endsWith("html"))
     					continue;
     				
     				//	3.3.1.1	process to get path, timestamp

@@ -1,0 +1,8 @@
+com/zhao/temporal/Utils/HTMLParser.class
+com/zhao/temporal/PageCompare/Page.class
+com/zhao/temporal/PageCompare/Paragraph.class
+com/zhao/temporal/Utils/CluewebFileProcess.class
+com/zhao/temporal/PageCompare/App.class
+com/zhao/temporal/PageCompare/HistoricalPage.class
+com/zhao/temporal/PageCompare/TargetPage.class
+com/zhao/temporal/Utils/FileProcess.class

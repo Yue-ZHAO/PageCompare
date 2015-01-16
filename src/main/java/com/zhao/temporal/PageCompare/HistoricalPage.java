@@ -43,7 +43,13 @@ public class HistoricalPage extends Page{
 		File[] filelist_Test = folder_Test.listFiles();
 		
 		for(File file_Test: filelist_Test) {
-			//	TODO only html file
+			//  For the html file
+			String Suffix_HistoricalPage = file_Test.getName().substring(file_Test.getName().lastIndexOf(".")+1);
+			
+			//	Make sure the file we check is a historical file
+			if (!Suffix_HistoricalPage.equals("html"))
+				continue;
+			
 			String temp_Timestamps = file_Test.getName().substring(0, 4) + "-"
 					+ file_Test.getName().substring(4, 6) + "-"
 					+ file_Test.getName().substring(6, 8);
