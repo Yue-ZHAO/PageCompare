@@ -12,6 +12,7 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.safety.Whitelist;
 //	import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 //	import org.jsoup.select.NodeVisitor;
@@ -78,12 +79,46 @@ public class HTMLParser {
 	    
 	    return textOnly;
 	  }
+	
+	public static String br2nl(String html) {
+	    if(html==null)
+	        return html;
+	    Document document = Jsoup.parse(html);
+	    document.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
+	    document.select("br").append("\\n");
+	    document.select("p").prepend("\\n\\n");
+	    String s = document.html().replaceAll("\\\\n", "\n");
+	    return Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+	}
+	
+	public static String br2nl(File htmlFile) throws IOException {
+
+	    Document document = Jsoup.parse(htmlFile, "UTF-8");
+	    document.outputSettings(new Document.OutputSettings().prettyPrint(false));//makes html() preserve linebreaks and spacing
+	    document.select("br").append("\\n");
+	    document.select("p").prepend("\\n\\n");
+	    String s = document.html().replaceAll("\\\\n", "\n");
+	    return Jsoup.clean(s, "", Whitelist.none(), new Document.OutputSettings().prettyPrint(false));
+	}
+	
+	public static List<String> file2Para(File htmlFile) throws IOException {
+		
+		List<String> list_Strings = new ArrayList<String>();
+		//	String file2String = br2nl(htmlFile);
+		//	TODO filter some elements we do not need, like &nbsp;
+		return list_Strings;
+	}
 
     public static void main( String[] args ) throws IOException {
     	//getPfromHTML("/Users/yuezhao/GoogleDrive/HistoricalPagesForClueweb12/downloadPages5/ffd3c78233e9259fc1f5edbf96ba486c/201211110446.html", 50);
     	List<String> testSrings = getPfromHTML("/Users/yuezhao/Desktop/clueweb12-0000wb-31-12737.html", 50);
-    		for (String testString: testSrings)
-    			System.out.println(testString);
+    	for (String testString: testSrings)
+    		System.out.println(testString);
+    	System.out.println("----------------------------------------");
+    	File testFile = new File("/Users/yuezhao/Desktop/clueweb12-0000wb-31-12737.html");
+    	String br2blString = br2nl(testFile);
+    	System.out.println(br2blString);
+    	
 //		File input = new File("/Users/yuezhao/Desktop/clueweb12-0000wb-31-12737.html");
 //		Document doc = Jsoup.parse(input, "UTF-8");
 //		doc.traverse(new NodeVisitor() {

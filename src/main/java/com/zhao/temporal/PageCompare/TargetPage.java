@@ -127,7 +127,7 @@ public class TargetPage extends Page{
 		return flag;
 	}
 	
-	public void toFile(String filePath) {
+	public void toFile(String filePath) throws IOException {
 		//	store the targetPage to file
 		File file_TaggedTargetPage = new File(filePath);
 		toFile(file_TaggedTargetPage);
@@ -157,12 +157,17 @@ public class TargetPage extends Page{
 		}
 	}
 
-	public void toFile(File file_TaggedTargetPage) {
+	public void toFile(File file_TaggedTargetPage) throws IOException {
 		
 		featureUpDate();
 		//	write the file line by line
 		String filePath_TaggedTargetPage = file_TaggedTargetPage.getAbsolutePath();
 		
+		if (file_TaggedTargetPage.exists()) {
+			file_TaggedTargetPage.delete();
+			file_TaggedTargetPage.createNewFile();
+		}
+				
 		//	URL
 		FileProcess.addLinetoaFile("#URL: " + this.URL, filePath_TaggedTargetPage);
 		
