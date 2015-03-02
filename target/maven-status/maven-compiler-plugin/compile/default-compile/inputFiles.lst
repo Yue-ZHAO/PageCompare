@@ -1,8 +1,8 @@
-/Users/yuezhao/Documents/workspace/PageCompare/src/main/java/com/zhao/temporal/Utils/CluewebFileProcess.java
-/Users/yuezhao/Documents/workspace/PageCompare/src/main/java/com/zhao/temporal/Utils/HTMLParser.java
-/Users/yuezhao/Documents/workspace/PageCompare/src/main/java/com/zhao/temporal/PageCompare/HistoricalPage.java
-/Users/yuezhao/Documents/workspace/PageCompare/src/main/java/com/zhao/temporal/Utils/FileProcess.java
-/Users/yuezhao/Documents/workspace/PageCompare/src/main/java/com/zhao/temporal/PageCompare/App.java
-/Users/yuezhao/Documents/workspace/PageCompare/src/main/java/com/zhao/temporal/PageCompare/Page.java
-/Users/yuezhao/Documents/workspace/PageCompare/src/main/java/com/zhao/temporal/PageCompare/Paragraph.java
-/Users/yuezhao/Documents/workspace/PageCompare/src/main/java/com/zhao/temporal/PageCompare/TargetPage.java
+/Users/yuezhao/Documents/workspace/PageCompare2/src/main/java/com/zhao/temporal/PageCompare/App.java
+/Users/yuezhao/Documents/workspace/PageCompare2/src/main/java/com/zhao/temporal/PageCompare/TargetPage.java
+/Users/yuezhao/Documents/workspace/PageCompare2/src/main/java/com/zhao/temporal/Utils/HTMLParser.java
+/Users/yuezhao/Documents/workspace/PageCompare2/src/main/java/com/zhao/temporal/PageCompare/HistoricalPage.java
+/Users/yuezhao/Documents/workspace/PageCompare2/src/main/java/com/zhao/temporal/PageCompare/Paragraph.java
+/Users/yuezhao/Documents/workspace/PageCompare2/src/main/java/com/zhao/temporal/Utils/FileProcess.java
+/Users/yuezhao/Documents/workspace/PageCompare2/src/main/java/com/zhao/temporal/PageCompare/Page.java
+/Users/yuezhao/Documents/workspace/PageCompare2/src/main/java/com/zhao/temporal/Utils/CluewebFileProcess.java

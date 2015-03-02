@@ -7,13 +7,15 @@ import java.security.NoSuchAlgorithmException;
 import com.zhao.temporal.Utils.CluewebFileProcess;
 import com.zhao.temporal.Utils.FileProcess;
 
+import de.l3s.boilerpipe.BoilerpipeProcessingException;
+
 /**
  * Hello world!
  *
  */
 public class App 
 {
-    public static void main( String[] args ) throws NoSuchAlgorithmException, IOException
+    public static void main( String[] args ) throws NoSuchAlgorithmException, IOException, BoilerpipeProcessingException
     {
     	//	1.	get the folder of target pages
     	String folderPath_TargetPage = args[0];
@@ -22,6 +24,14 @@ public class App
     	//	2. 	get the root folder of historical pages
     	String rootFolderPath_HistoricalPage = args[1];
     	File rootFolder_HistoricalPage = new File(rootFolderPath_HistoricalPage);
+    	
+		// select the feature file path
+		String folderPath_TaggedPage = args[2];
+		File folder_TaggedPage = new File(folderPath_TaggedPage);
+		if (!folder_TaggedPage.exists() || !folder_TaggedPage.isDirectory())
+			folder_TaggedPage.mkdir();
+		
+		File file_TargetPageFeatures = new File(folder_TaggedPage, "TargetPageFeatures");
         
     	//	3. 	process each file in the folder of target pages
     	File[] fileList_TargetPage = folder_TargetPage.listFiles();
@@ -82,13 +92,6 @@ public class App
     		
     			//	3.3.2	output the features of targetPage to the feature file
     			String feature_TargetPage = targetPage.featureToString();
-    			//			select the feature file path
-    			String folderPath_TaggedPage = args[2];
-    			File folder_TaggedPage = new File(folderPath_TaggedPage);
-    			if (!folder_TaggedPage.exists() || !folder_TaggedPage.isDirectory())
-    				folder_TaggedPage.mkdir();
-    			
-    			File file_TargetPageFeatures = new File(folder_TaggedPage, "TargetPageFeatures");
     			FileProcess.addLinetoaFile(feature_TargetPage, file_TargetPageFeatures.getAbsolutePath());
     			
     			//	3.3.3	output the tagged target page to a file
