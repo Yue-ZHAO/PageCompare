@@ -14,13 +14,13 @@ public class HistoricalPage extends Page{
 	//	List of paragraphs
 	public List<String> paragraphs = new ArrayList<String>();
 	
-	HistoricalPage(String absPath_Page, String urlString, String timestamp) throws NoSuchAlgorithmException, IOException {
+	HistoricalPage(String absPath_Page, String urlString, String timestamp, int lenThreshold) throws NoSuchAlgorithmException, IOException {
 		File file_historicalPage = new File(absPath_Page);
-		pageInit(file_historicalPage, urlString, timestamp, 50);
+		pageInit(file_historicalPage, urlString, timestamp, lenThreshold);
 	}
 	
-	HistoricalPage(File file_Page, String urlString, String timestamp) throws NoSuchAlgorithmException, IOException {
-		pageInit(file_Page, urlString, timestamp, 50);
+	HistoricalPage(File file_Page, String urlString, String timestamp, int lenThreshold) throws NoSuchAlgorithmException, IOException {
+		pageInit(file_Page, urlString, timestamp, lenThreshold);
 	}
 		
 	private void pageInit(File file_Page, String urlString, String timestamp, int lenThreshold) throws NoSuchAlgorithmException, IOException {
@@ -55,7 +55,7 @@ public class HistoricalPage extends Page{
 					+ file_Test.getName().substring(6, 8);
 			System.out.println(file_Test.getAbsolutePath());
 			System.out.println(temp_Timestamps);
-			HistoricalPage historicalPage = new HistoricalPage(file_Test.getAbsolutePath(), url, temp_Timestamps);
+			HistoricalPage historicalPage = new HistoricalPage(file_Test.getAbsolutePath(), url, temp_Timestamps, 50);
 			System.out.println(historicalPage.URL);
 			System.out.println(historicalPage.MD5Code);
 			System.out.println(historicalPage.currentTimestamp);

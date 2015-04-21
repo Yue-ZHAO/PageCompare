@@ -37,13 +37,13 @@ public class TargetPage extends Page{
 	//	implement the Class Paragraph
 	public List<Paragraph> paragraphs = new ArrayList<Paragraph>();
 	
-	TargetPage(String absPath_Page, String urlString, String timestamp) throws NoSuchAlgorithmException, IOException, BoilerpipeProcessingException {
+	TargetPage(String absPath_Page, String urlString, String timestamp, int lenThreshold, double simThreshold) throws NoSuchAlgorithmException, IOException, BoilerpipeProcessingException {
 		File file_historicalPage = new File(absPath_Page);
-		pageInit(file_historicalPage, urlString, timestamp, 50, 0.7);
+		pageInit(file_historicalPage, urlString, timestamp, lenThreshold, simThreshold);
 	}
 	
-	TargetPage(File file_Page, String urlString, String timestamp) throws NoSuchAlgorithmException, IOException, BoilerpipeProcessingException {
-		pageInit(file_Page, urlString, timestamp, 50, 0.7);
+	TargetPage(File file_Page, String urlString, String timestamp, int lenThreshold, double simThreshold) throws NoSuchAlgorithmException, IOException, BoilerpipeProcessingException {
+		pageInit(file_Page, urlString, timestamp, lenThreshold, simThreshold);
 	}
 	
 	private void pageInit(File file_Page, String urlString, String timestamp, int lenThreshold, double simThreshold) throws NoSuchAlgorithmException, IOException, BoilerpipeProcessingException {
@@ -237,7 +237,7 @@ public class TargetPage extends Page{
     		System.out.println(timestamp_TargetPage);
     		
     		//	2.2 generate TargetPage targetPage(path, url, timestamp)
-    		TargetPage targetPage = new TargetPage(filePath_TargetPage, url, timestamp_TargetPage);
+    		TargetPage targetPage = new TargetPage(filePath_TargetPage, url, timestamp_TargetPage, 50, 0.7);
     	
     		//	2.3	output the construct result
     		System.out.println("URL: " + targetPage.URL);
@@ -278,7 +278,7 @@ public class TargetPage extends Page{
     								+ file_HistoricalPage.getName().substring(6, 8);
     				String timestamp_HistoricalPage = timeTemp;
     				
-    				HistoricalPage historicalPage = new HistoricalPage(filePath_HistoricalPage, url, timestamp_HistoricalPage);   				
+    				HistoricalPage historicalPage = new HistoricalPage(filePath_HistoricalPage, url, timestamp_HistoricalPage, 50);   				
     		    	
     				//	3.3.1.3	targetPage.pageTag(historicalPage, 0.7)
     				targetPage.pageTag(historicalPage, 0.7);

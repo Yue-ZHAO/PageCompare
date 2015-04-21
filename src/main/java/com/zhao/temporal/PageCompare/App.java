@@ -17,21 +17,30 @@ public class App
 {
     public static void main( String[] args ) throws NoSuchAlgorithmException, IOException, BoilerpipeProcessingException
     {
-    	//	1.	get the folder of target pages
+    	//	1. Get the folder of target pages
     	String folderPath_TargetPage = args[0];
     	File folder_TargetPage = new File(folderPath_TargetPage);
+    	System.out.println(args[0]);
     	
-    	//	2. 	get the root folder of historical pages
+    	//	2. Get the root folder of historical pages
     	String rootFolderPath_HistoricalPage = args[1];
     	File rootFolder_HistoricalPage = new File(rootFolderPath_HistoricalPage);
+    	System.out.println(args[1]);
     	
-		// select the feature file path
+		//	3. Select the feature file path
 		String folderPath_TaggedPage = args[2];
 		File folder_TaggedPage = new File(folderPath_TaggedPage);
 		if (!folder_TaggedPage.exists() || !folder_TaggedPage.isDirectory())
 			folder_TaggedPage.mkdir();
+		System.out.println(args[2]);
 		
 		File file_TargetPageFeatures = new File(folder_TaggedPage, "TargetPageFeatures");
+		
+		//	4. Threshold
+		int lenThreshold = Integer.parseInt(args[3]);
+		System.out.println(lenThreshold);
+		double simThreshold = Double.parseDouble(args[4]);
+		System.out.println(simThreshold);
         
     	//	3. 	process each file in the folder of target pages
     	File[] fileList_TargetPage = folder_TargetPage.listFiles();
@@ -53,15 +62,13 @@ public class App
     		String timestamp_TargetPage = CluewebFileProcess.readTimeFromCluewebFile(filePath_TargetPage);
     		
     		//	3.2 generate TargetPage targetPage(path, url, timestamp)
-    		TargetPage targetPage = new TargetPage(filePath_TargetPage, url, timestamp_TargetPage);
+    		TargetPage targetPage = new TargetPage(filePath_TargetPage, url, timestamp_TargetPage, lenThreshold, simThreshold);
     		
     		//	3.3	find the historical folder of the target page, if not, continue, else    		
 			File folder_HistoricalPage = new File(rootFolder_HistoricalPage, targetPage.MD5Code);		    		
     		    		
     		//File folder_HistoricalPage = new File(folderPath_HistoricalPage);
-    		if (!folder_HistoricalPage.exists())
-    			continue;
-    		else { 		
+    		if (folder_HistoricalPage.exists()) { 		
     			//	3.3.1	for each file in the historical folder
     			File[] fileList_HistoricalPage = folder_HistoricalPage.listFiles();
     			
@@ -84,10 +91,10 @@ public class App
     				String timestamp_HistoricalPage = timeTemp;
     				
     				//	3.3.1.2	generate HistoricalPage historicalPage(path, url, timestamp)
-    				HistoricalPage historicalPage = new HistoricalPage(filePath_HistoricalPage, url, timestamp_HistoricalPage);   				
+    				HistoricalPage historicalPage = new HistoricalPage(filePath_HistoricalPage, url, timestamp_HistoricalPage, lenThreshold);   				
     	
     				//	3.3.1.3	targetPage.pageTag(historicalPage, 0.7)
-    				targetPage.pageTag(historicalPage, 0.7);
+    				targetPage.pageTag(historicalPage, simThreshold);
     			}
     		
     			//	3.3.2	output the features of targetPage to the feature file
@@ -101,6 +108,8 @@ public class App
     	
     			//	3.3.4	output the signal to screen
     			System.out.println( "Finish: " + file_TargetPage.getAbsolutePath());
+    		} else {
+    			System.out.println( "Not Find: " + file_TargetPage.getAbsolutePath());
     		}
     	
     	}
