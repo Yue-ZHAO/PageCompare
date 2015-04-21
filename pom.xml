@@ -4,7 +4,7 @@
 
   <groupId>com.zhao.temporal</groupId>
   <artifactId>PageCompare2</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.1.1-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>PageCompare2</name>
