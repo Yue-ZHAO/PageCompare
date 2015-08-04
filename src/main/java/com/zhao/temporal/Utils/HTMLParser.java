@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,6 +20,7 @@ import org.jsoup.safety.Whitelist;
 //	import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 //	import org.jsoup.select.NodeVisitor;
+
 
 
 
@@ -127,6 +129,7 @@ public class HTMLParser {
 	    if(html==null)
 	        return html;
 	    Document document = Jsoup.parse(html, "UTF-8");
+	    
 //	    System.out.println(document.html());
 //	    System.out.println();
 //	    System.out.println("--------------------------");
@@ -142,6 +145,7 @@ public class HTMLParser {
 //	    
 //	    String s = document.html().replaceAll("\\\\n", "\n");
 //	    document.select("br").append("tags2nl_zy");
+	    
 	    document.select("p").prepend("tags2nl_zy");
 	    document.select("div").prepend("tags2nl_zy");
 	    
@@ -150,8 +154,20 @@ public class HTMLParser {
 	}
 	
 	public static String br2nl(File htmlFile) throws IOException {
-
-	    Document document = Jsoup.parse(htmlFile, "UTF-8");
+		
+		if (!htmlFile.exists())
+			return null;
+		
+		Document document;
+		
+		if (htmlFile.getName().endsWith(".gz")) {
+			FileInputStream fis = new FileInputStream(htmlFile);
+			GZIPInputStream gis = new GZIPInputStream(fis);
+			document = Jsoup.parse(gis, "UTF-8", "");
+		} else {
+			document = Jsoup.parse(htmlFile, "UTF-8");
+        } 
+	    
 //	    System.out.println(document.html());
 //	    System.out.println();
 //	    System.out.println("--------------------------");
@@ -167,6 +183,7 @@ public class HTMLParser {
 //	    
 //	    String s = document.html().replaceAll("\\\\n", "\n");
 //	    document.select("br").append("tags2nl_zy");
+	    
 	    document.select("p").prepend("tags2nl_zy");
 	    document.select("div").prepend("tags2nl_zy");
 	    

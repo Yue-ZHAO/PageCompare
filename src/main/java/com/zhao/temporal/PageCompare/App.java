@@ -27,7 +27,7 @@ public class App
     	File rootFolder_HistoricalPage = new File(rootFolderPath_HistoricalPage);
     	System.out.println(args[1]);
     	
-		//	3. Select the feature file path
+		//	3. Set the output folder for the compared pages and their feature file
 		String folderPath_TaggedPage = args[2];
 		File folder_TaggedPage = new File(folderPath_TaggedPage);
 		if (!folder_TaggedPage.exists() || !folder_TaggedPage.isDirectory())
@@ -78,8 +78,15 @@ public class App
     				//	Suffix_HistoricalPage.endsWith("html");
     			
     				//	Make sure the file we check is a historical file
-    				if (!file_HistoricalPage.getName().endsWith("html"))
+    				//	If the name of the file shorter than 8, skip
+    				//	Else if the substring(0, 8) of the name is not numbers, skip
+    				if (file_HistoricalPage.getName().length() < 8)
     					continue;
+    				else {
+    					String histFileNameString = file_HistoricalPage.getName().substring(0, 8);
+    					if (!histFileNameString.matches("^[0-9]*$"))
+    						continue;
+    				}
     				
     				//	3.3.1.1	process to get path, timestamp
     				String filePath_HistoricalPage = file_HistoricalPage.getAbsolutePath();
