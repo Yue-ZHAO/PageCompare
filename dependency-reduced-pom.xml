@@ -4,7 +4,7 @@
   <groupId>com.zhao.temporal</groupId>
   <artifactId>PageCompare2</artifactId>
   <name>PageCompare2</name>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.1.2-SNAPSHOT</version>
   <url>http://maven.apache.org</url>
   <build>
     <resources>
